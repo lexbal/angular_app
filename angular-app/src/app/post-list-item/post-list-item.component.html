@@ -1,0 +1,14 @@
+
+<li *ngIf="post" [ngClass]="{'list-group-item': true, 'list-group-item-success': post.loveIts > 0, 'list-group-item-danger': post.loveIts < 0 }">
+    <div class="item-header">
+        <h3>{{ post.title }}</h3>
+        <div class="date">{{ post.created_at|date :'short' }}</div>
+    </div>
+    <div class="item-content">{{ post.content }}</div>
+    <button class="btn btn-success" (click)="loveIt()">
+        Love It    
+    </button>
+    <button class="btn btn-danger" (click)="dontLoveIt()">
+        Don't Love It    
+    </button>
+</li>

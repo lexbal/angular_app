@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  angular:
+    build:
+      context: ./angular-app
+      dockerfile: Dockerfile
+    container_name: angular
+    tty: true
+    

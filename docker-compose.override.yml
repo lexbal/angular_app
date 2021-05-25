@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  angular:
+    volumes:
+      - ./angular-app:/usr/src/app/angular-app
+      - /usr/src/app/angular-app/node_modules
+    ports:
+      - "4201:4201"
