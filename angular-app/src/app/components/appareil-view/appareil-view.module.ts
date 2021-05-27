@@ -14,7 +14,7 @@ import { AppareilComponent } from '../appareil/appareil.component';
   ],
   declarations: [
     AppareilComponent,
-    AppareilViewComponent
+    AppareilViewComponent,
   ]
 })
 export class AppareilViewModule { }

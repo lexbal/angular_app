@@ -31,6 +31,14 @@ export class AppareilService {
     }
   }
 
+  getAppareilById(id: number): Appareil|undefined {
+    return this.appareils.find(
+      (appareil) => {
+        return appareil.id === id;
+      }
+    );
+  }
+
   randomDate(start: Date, end: Date) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
   }

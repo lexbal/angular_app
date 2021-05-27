@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class AppareilComponent implements OnInit {
 
+  @Input() id?: number;
   @Input() appareilName: string = "";
   @Input() appareilStatus: string = "";
   @Input() appareilDate?: Date;

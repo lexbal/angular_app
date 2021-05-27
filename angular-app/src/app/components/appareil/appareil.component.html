@@ -5,5 +5,8 @@
         <div class="date">Last update : {{ appareilDate|date :'fullDate' }}</div>
     </div>
     <input [(ngModel)]="appareilName" />
-    <div class="item-content">{{ appareilStatus }}</div>
+    <div class="item-content">
+        {{ appareilStatus }}
+    </div>
+    <a [routerLink]="[id]">More infos...</a>
 </li>
