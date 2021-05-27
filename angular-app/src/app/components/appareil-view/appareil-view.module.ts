@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { AppareilViewRoutingModule } from './appareil-view-routing.module';
 import { AppareilViewComponent } from './appareil-view.component';
 import { AppareilComponent } from '../appareil/appareil.component';
+import { SingleAppareilComponent } from '../single-appareil/single-appareil.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { AppareilComponent } from '../appareil/appareil.component';
   declarations: [
     AppareilComponent,
     AppareilViewComponent,
+    SingleAppareilComponent
   ]
 })
 export class AppareilViewModule { }

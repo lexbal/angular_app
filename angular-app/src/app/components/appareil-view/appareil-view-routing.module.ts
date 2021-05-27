@@ -2,11 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppareilViewComponent } from './appareil-view.component';
+import { SingleAppareilComponent } from '../single-appareil/single-appareil.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AppareilViewComponent
+  },
+  {
+    path: ':id',
+    component: SingleAppareilComponent
   },
 ];
 

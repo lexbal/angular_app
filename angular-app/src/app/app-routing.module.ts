@@ -5,7 +5,6 @@ import {
   AuthGuardService as AuthGuard 
 } from './services/auth/auth-guard.service';
 import { LoginComponent } from './components/login/login.component';
-import { SingleAppareilComponent } from './components/single-appareil/single-appareil.component';
 
 const routes: Routes = [
   { 
@@ -24,10 +23,6 @@ const routes: Routes = [
   { 
     path: 'login',
     component: LoginComponent
-  },
-  {
-    path: 'appareils/:id',
-    component: SingleAppareilComponent
   },
   {
     path: 'not-found',

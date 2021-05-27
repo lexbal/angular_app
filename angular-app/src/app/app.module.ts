@@ -12,15 +12,13 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/login/login.component';
-import { SingleAppareilComponent } from './components/single-appareil/single-appareil.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     NotFoundComponent,
-    LoginComponent,
-    SingleAppareilComponent
+    LoginComponent
   ],
   imports: [
     BrowserModule,
