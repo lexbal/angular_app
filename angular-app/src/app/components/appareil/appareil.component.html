@@ -2,7 +2,8 @@
     <div [ngClass]="appareilStatus == 'allumé' ? 'indicator-success' : 'indicator-danger'"></div>
     <div class="item-header">
         <h3>{{ appareilName }}</h3>
+        <div class="date">Last update : {{ appareilDate|date :'fullDate' }}</div>
     </div>
-    <input type="text" name="appareilName" ngModel>
+    <input [(ngModel)]="appareilName" />
     <div class="item-content">{{ appareilStatus }}</div>
 </li>
