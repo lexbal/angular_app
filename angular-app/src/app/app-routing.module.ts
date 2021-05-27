@@ -27,7 +27,6 @@ const routes: Routes = [
   },
   {
     path: 'appareils/:id',
-    pathMatch:'full',
     component: SingleAppareilComponent
   },
   {
