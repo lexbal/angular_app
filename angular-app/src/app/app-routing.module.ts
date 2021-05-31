@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { 
-  AuthGuardService as AuthGuard 
-} from './services/auth/auth-guard.service';
-import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   { 
@@ -17,12 +13,15 @@ const routes: Routes = [
   },
   { 
     path: 'appareils', 
-    canActivate: [AuthGuard],
     loadChildren: () => import('./components/appareil-view/appareil-view.module').then(m => m.AppareilViewModule) 
   },
   { 
+    path: 'users', 
+    loadChildren: () => import('./components/user-list/user-list.module').then(m => m.UserListModule) 
+  },
+  { 
     path: 'login',
-    component: LoginComponent
+    loadChildren: () => import('./components/login/login.module').then(m => m.LoginModule) 
   },
   {
     path: 'not-found',

@@ -1,0 +1,75 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="card">
+                <h4 class="card-header">New User</h4>
+                <div class="card-body">
+                    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="firstname">Firstname</label>
+                                <input type="text" formControlName="firstname" class="form-control" placeholder="Firstname" [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }" />
+                                <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                    <div *ngIf="f.firstname.errors.required">Firstname is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="lastname">Lastname</label>
+                                <input type="text" formControlName="lastname" class="form-control" placeholder="Lastname" [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }" />
+                                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                    <div *ngIf="f.lastname.errors.required">Lastname is required</div>
+                                </div>
+                            </div>
+                        </div>
+                         
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="username">Username</label>
+                                <input type="text" formControlName="username" class="form-control" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                                    <div *ngIf="f.username.errors.required">Username is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="email">Email</label>
+                                <input type="text" formControlName="email" class="form-control" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" formControlName="password" class="form-control" autocomplete="on" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                            </div>
+                        </div>               
+                        <div class="form-group">
+                            <label for="drinkPreference">Drink Preference</label>
+                            <input type="text" formControlName="drinkPreference" class="form-control" placeholder="Drink Preference" [ngClass]="{ 'is-invalid': submitted && f.drinkPreference.errors }" />
+                            <div *ngIf="submitted && f.drinkPreference.errors" class="invalid-feedback">
+                                <div *ngIf="f.drinkPreference.errors.required">Drink Preference is required</div>
+                            </div>
+                        </div>
+                        <label for="hobbies" *ngIf="getHobbies().controls.length > 0">Hobbies</label>
+                        <div formArrayName="hobbies" 
+                            *ngFor="let hobbyControl of getHobbies().controls; let i = index">
+                            <div class="form-group" [formGroupName]="i">
+                                <input class="form-control" formControlName="name" placeholder="Hobbie n°{{ i }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button [disabled]="loading" class="btn btn-primary">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Create
+                            </button>
+                            <button type="button"  class="btn btn-success" (click)="onAddHobby()">Add hobby</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

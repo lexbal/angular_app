@@ -3,14 +3,19 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppareilViewComponent } from './appareil-view.component';
 import { SingleAppareilComponent } from '../single-appareil/single-appareil.component';
+import { 
+  AuthGuardService as AuthGuard 
+} from '../../services/auth/auth-guard.service';
 
 const routes: Routes = [
   {
     path: '',
+    canActivate: [AuthGuard],
     component: AppareilViewComponent
   },
   {
     path: ':id',
+    canActivate: [AuthGuard],
     component: SingleAppareilComponent
   },
 ];

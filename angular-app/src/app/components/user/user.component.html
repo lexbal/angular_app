@@ -1,0 +1,26 @@
+<li class="list-group-item" *ngIf="user">
+    <div class="item-header">
+        <h3>{{ user.lastname }} {{ user.firstname }}</h3>
+    </div>
+    <div class="item-content">
+        <div class="alert alert-info" role="alert">
+            <h5>Informations de connexion</h5>
+            <ul>
+                <li>Username : {{ user.username }}</li>
+                <li>Password : {{ user.password }}</li>
+            </ul>
+        </div>
+        <ul>
+            <li>Email Address : {{ user.email }}</li>
+            <li>Drink Preference : {{ user.drinkPreference }}</li>
+            <li *ngIf="user.hobbies">
+                Hobbies : 
+                <ul>
+                    <li *ngFor="let hobbie of user.hobbies;">
+                        {{ hobbie.name }}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</li>

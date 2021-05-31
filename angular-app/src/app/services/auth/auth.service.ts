@@ -4,16 +4,18 @@ import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
+import { UserService } from '../user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  users: User[] = [
-    {"username": "user", "password": "1234"}
-  ];
+  users: User[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) { }
 
   public isAuthenticated() {
     return localStorage.getItem('user');
@@ -31,6 +33,13 @@ export class AuthService {
   }
 
   login(username: string, password: string) {
+    this.userService.userSubject.subscribe(
+      (users: User[]) => {
+        this.users = users;
+      }
+    );
+    this.userService.emitUser();
+
     return from(this.users).pipe(map(user => {
       if (user.username == username && user.password == password) {
         localStorage.setItem('user', JSON.stringify(user));

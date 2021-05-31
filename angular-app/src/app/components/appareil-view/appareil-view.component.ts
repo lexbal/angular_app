@@ -16,7 +16,16 @@ export class AppareilViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appareils = this.appareilService.appareils;
+    this.appareilService.appareilSubject.subscribe(
+      (appareils: Appareil[]) => {
+        this.appareils = appareils;
+      }
+    );
+
+    this.appareilService.emitAppareilSubject();
   }
 
+  ngOnDestroy() {
+    this.appareilService.appareilSubject.unsubscribe();
+  }
 }
