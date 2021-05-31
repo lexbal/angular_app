@@ -1,0 +1,8 @@
+<li *ngIf="contenu" class="list-group-item">
+    <div class="item-content">
+        <p>{{ contenu.titre }}</p>
+        <input name="{{ contenu.titre }}"
+                [(ngModel)]="contenu.nb_etud"
+                (change)="updateNb()"/> étudiants
+    </div>
+</li>

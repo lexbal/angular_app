@@ -1,0 +1,14 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            {{ nb_etuds }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <ul class="list-group" *ngIf="courses">
+                <app-course *ngFor="let course of courses;" (newNb)="onNewNb($event)" [contenu]="course"></app-course>
+            </ul>
+        </div>
+    </div>
+</div>
