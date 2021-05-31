@@ -24,8 +24,4 @@ export class AppareilViewComponent implements OnInit {
 
     this.appareilService.emitAppareilSubject();
   }
-
-  ngOnDestroy() {
-    this.appareilService.appareilSubject.unsubscribe();
-  }
 }
