@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { BlogRoutingModule } from './blog-routing.module';
 import { BlogComponent } from './blog.component';
-import { PostListComponent } from '../post-list/post-list.component';
-import { PostListItemComponent } from '../post-list-item/post-list-item.component';
+import { PostListComponent } from './post-list/post-list.component';
+import { PostListItemComponent } from './post-list/post-list-item/post-list-item.component';
 
 @NgModule({
   imports: [

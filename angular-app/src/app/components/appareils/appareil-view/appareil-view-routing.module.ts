@@ -5,7 +5,7 @@ import { AppareilViewComponent } from './appareil-view.component';
 import { SingleAppareilComponent } from '../single-appareil/single-appareil.component';
 import { 
   AuthGuardService as AuthGuard 
-} from '../../services/auth/auth-guard.service';
+} from '../../../services/auth/auth-guard.service';
 
 const routes: Routes = [
   {

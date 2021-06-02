@@ -23,13 +23,14 @@ export class CoursesComponent implements OnInit {
   }
 
   onNewNb(nb: number) {
-    this.nb_etuds = +this.nb_etuds + +nb;
+    //this.nb_etuds = +this.nb_etuds + +nb;
+    this.getNbEtuds();
   }
 
   getNbEtuds(): void {
     this.nb_etuds = this.courses.reduce(
       (prev, cur) => {
-        return prev + cur.nb_etud;
+        return +prev + +cur.nb_etud;
       }, 0
     );
   }

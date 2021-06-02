@@ -13,19 +13,19 @@ const routes: Routes = [
   },
   { 
     path: 'appareils', 
-    loadChildren: () => import('./components/appareil-view/appareil-view.module').then(m => m.AppareilViewModule) 
+    loadChildren: () => import('./components/appareils/appareil-view/appareil-view.module').then(m => m.AppareilViewModule) 
   },
   { 
     path: 'users', 
-    loadChildren: () => import('./components/user-list/user-list.module').then(m => m.UserListModule) 
+    loadChildren: () => import('./components/users/user-list/user-list.module').then(m => m.UserListModule) 
   },
   { 
     path: 'courses',
     loadChildren: () => import('./components/courses/courses.module').then(m => m.CoursesModule) 
   },
   { 
-    path: 'login',
-    loadChildren: () => import('./components/login/login.module').then(m => m.LoginModule) 
+    path: 'auth',
+    loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule) 
   },
   {
     path: 'not-found',
