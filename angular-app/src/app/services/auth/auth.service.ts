@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
+import firebase from 'firebase/app';
 import { from } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
@@ -11,25 +12,30 @@ import { UserService } from '../user.service';
 })
 export class AuthService {
   users: User[] = [];
+  isAuth: boolean = false;
 
   constructor(
-    private router: Router,
+    private afAuth: AngularFireAuth,
     private userService: UserService
   ) { }
 
   public isAuthenticated() {
-    return localStorage.getItem('user');
+    return this.afAuth.onAuthStateChanged(
+      (user) => {
+        if (user) {
+          this.isAuth = true;
+        } else {
+          //localStorage.getItem('user')
+          this.isAuth = false
+        }
+      }
+    )
   }
 
   public getUsername(): string {
     let user = this.isAuthenticated();
 
     return (user) ? JSON.parse(user).username : null;
-  }
-
-  public logout() {
-    localStorage.removeItem('user');
-    this.router.navigate(['/']);
   }
 
   login(username: string, password: string) {
@@ -48,5 +54,41 @@ export class AuthService {
       
       return false;
     }));
+  }
+
+  loginFireBase(email: string, password: string): Promise<void> {
+    return new Promise<void>(
+      (resolve, reject) => {
+        this.afAuth.signInWithEmailAndPassword(email, password).then(
+          () => {
+            resolve();
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
+
+  registerFireBase(email: string, password: string): Promise<void> {
+    return new Promise<void>(
+      (resolve, reject) => {
+        this.afAuth.createUserWithEmailAndPassword(email, password).then(
+          () => {
+            resolve();
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      }
+    );
+  }
+
+  public logout() {
+    this.afAuth.signOut();
+    localStorage.removeItem('user');
+    //this.router.navigate(['/']);
   }
 }

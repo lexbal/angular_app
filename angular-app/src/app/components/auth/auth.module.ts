@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { FirebaseLoginComponent } from './firebase-login/firebase-login.component';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { RegisterComponent } from './register/register.component';
   ],
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FirebaseLoginComponent
   ]
 })
 export class AuthModule { }

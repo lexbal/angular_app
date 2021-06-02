@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+
 import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-firebase-login',
+  templateUrl: './firebase-login.component.html',
+  styleUrls: ['./firebase-login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class FirebaseLoginComponent implements OnInit {
 
   form!: FormGroup;
   loading: boolean = false;
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
 
@@ -42,19 +43,14 @@ export class LoginComponent implements OnInit {
     this.loading = true;
 
     if (!this.authService.isAuthenticated()) {
-      this.authService.login(this.f.username.value, this.f.password.value)
-        .subscribe(
-          data => {
-            if (data) {
-              this.router.navigate([this.returnUrl]);
-            } else {
-              this.error = true;
-            }
-
+      this.authService.loginFireBase(this.f.email.value, this.f.password.value)
+        .then(
+          () => {
             this.loading = false;
+            this.router.navigate([this.returnUrl]);
           },
-          error => {
-            this.error = true;
+          (error) => {
+            this.error = error;
             this.loading = false;
           }
         );

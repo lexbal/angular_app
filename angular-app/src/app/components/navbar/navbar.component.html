@@ -24,7 +24,7 @@
             <button class="btn btn-info" routerLink="/users/new">Nouvel Utilisateur</button>
           </li>
         </ul>
-        <ul class="nav navbar-nav"*ngIf="!authService.isAuthenticated()">
+        <ul class="nav navbar-nav"*ngIf="!authService.isAuthenticated() && !isAuth">
           <li class="nav-item" routerLinkActive="active" >
             <a class="nav-link" routerLink="/auth/register">Register</a>
           </li>
@@ -32,7 +32,7 @@
             <a class="nav-link" routerLink="/auth/login">Login</a>
           </li>
         </ul>
-        <ul class="nav navbar-nav" *ngIf="authService.isAuthenticated()">
+        <ul class="nav navbar-nav" *ngIf="authService.isAuthenticated() || isAuth">
           <span class="navbar-text">
             Connected as : {{ authService.getUsername() }}
           </span>

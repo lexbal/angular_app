@@ -1,17 +1,11 @@
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div [ngClass]="{'card': true, 'bg-success': status == 'allumé', 'bg-danger': status == 'éteint' }">
-                <div class="card-header item-header">
-                    <h3>{{ name }}</h3>
-                    <div [ngClass]="status == 'allumé' ? 'indicator-success' : 'indicator-danger'"></div>
-                    <div class="date">Last update : {{ date|date :'fullDate' }}</div>
-                </div>
+<div [ngClass]="{'card': true, 'bg-success': status == 'allumé', 'bg-danger': status == 'éteint' }">
+    <div class="card-header item-header">
+        <h3>{{ name }}</h3>
+        <div [ngClass]="status == 'allumé' ? 'indicator-success' : 'indicator-danger'"></div>
+        <div class="date">Last update : {{ date|date :'fullDate' }}</div>
+    </div>
 
-                <div class="card-body item-content">
-                    Status : {{ status }}
-                </div>
-            </div>
-        </div>
+    <div class="card-body item-content">
+        Status : {{ status }}
     </div>
 </div>

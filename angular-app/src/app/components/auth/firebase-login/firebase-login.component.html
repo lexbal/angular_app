@@ -1,12 +1,12 @@
 <div class="card">
-    <h4 class="card-header">Local Login</h4>
+    <h4 class="card-header">Firebase Login</h4>
     <div class="card-body">
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                    <div *ngIf="f.username.errors.required">Username is required</div>
+                <label for="email">Email</label>
+                <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email is required</div>
                 </div>
             </div>
             <div class="form-group">
@@ -24,8 +24,8 @@
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
                     Login
                 </button>
-                <a class="btn btn-warning" routerLink="/auth/firebase">
-                    Login with firebase
+                <a class="btn btn-info" routerLink="/auth/login">
+                    Login with local data
                 </a>
             </div>
         </form>
