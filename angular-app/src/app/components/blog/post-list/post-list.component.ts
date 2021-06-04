@@ -7,11 +7,10 @@ import { Post } from '../../../models/post';
   styleUrls: ['./post-list.component.scss']
 })
 export class PostListComponent implements OnInit {
+  
   @Input() posts: Post[] = []
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
-  
+  ngOnInit(): void { }
 }

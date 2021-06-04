@@ -29,5 +29,4 @@ export class SingleAppareilComponent implements OnInit {
       this.router.navigate(['/not-found']);
     }
   }
-
 }

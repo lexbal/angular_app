@@ -13,7 +13,7 @@
         <ul>
             <li>Email Address : {{ user.email }}</li>
             <li>Drink Preference : {{ user.drinkPreference }}</li>
-            <li *ngIf="user.hobbies">
+            <li *ngIf="user.hobbies!.length > 0">
                 Hobbies : 
                 <ul>
                     <li *ngFor="let hobbie of user.hobbies;">

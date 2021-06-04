@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { User } from '../../models/user';
 import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
@@ -9,27 +9,21 @@ import { AuthService } from '../../services/auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
 
-  isNavbarCollapsed = true;
-  isAuth: boolean = false;
+  isNavbarCollapsed: boolean = true;
+  currentUser!: User|null;
 
-  constructor(
-    public authService: AuthService,
-    private afAuth: AngularFireAuth
-  ) { }
+  constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.afAuth.onAuthStateChanged(
+    this.authService.isAuthenticated();
+    this.authService.getCurrentUser().subscribe(
       (user) => {
-        if (user) {
-          this.isAuth = true;
-        } else {
-          this.isAuth = false
-        }
-      }
-    )
+        this.currentUser = user;
+      } 
+    );
   }
 
-  onLogout() {
+  onLogout(): void {
     this.authService.logout();
   }
 }

@@ -15,10 +15,9 @@ export class CourseComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  updateNb() {
+  updateNb(): void {
     this.newNb.emit(this.contenu.nb_etud);
   }
 }

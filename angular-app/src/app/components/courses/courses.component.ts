@@ -11,18 +11,15 @@ export class CoursesComponent implements OnInit {
 
   courses: Cours[] = [];
   nb_etuds: number = 0;
-  coursesService!: CoursesService;
 
-  constructor(private $coursesService: CoursesService) { 
-    this.coursesService = $coursesService;
-  }
+  constructor(private coursesService: CoursesService) { }
 
   ngOnInit(): void {
     this.courses = this.coursesService.getCourses();
     this.getNbEtuds();
   }
 
-  onNewNb(nb: number) {
+  onNewNb(nb: number): void {
     //this.nb_etuds = +this.nb_etuds + +nb;
     this.getNbEtuds();
   }

@@ -12,19 +12,22 @@
             <a class="nav-link" routerLink="/blog">Blog</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/appareils">Appareil</a>
+            <a class="nav-link" routerLink="/appareils">Devices</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/courses">Cours</a>
+            <a class="nav-link" routerLink="/courses">Course</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" routerLink="/users">Utiliateurs</a>
+            <a class="nav-link" routerLink="/books">Books</a>
           </li>
           <li class="nav-item" routerLinkActive="active">
-            <button class="btn btn-info" routerLink="/users/new">Nouvel Utilisateur</button>
+            <a class="nav-link" routerLink="/users">Users</a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <button class="btn btn-info" routerLink="/users/new">New User</button>
           </li>
         </ul>
-        <ul class="nav navbar-nav"*ngIf="!authService.isAuthenticated() && !isAuth">
+        <ul class="nav navbar-nav"*ngIf="!currentUser">
           <li class="nav-item" routerLinkActive="active" >
             <a class="nav-link" routerLink="/auth/register">Register</a>
           </li>
@@ -32,9 +35,9 @@
             <a class="nav-link" routerLink="/auth/login">Login</a>
           </li>
         </ul>
-        <ul class="nav navbar-nav" *ngIf="authService.isAuthenticated() || isAuth">
+        <ul class="nav navbar-nav" *ngIf="currentUser">
           <span class="navbar-text">
-            Connected as : {{ authService.getUsername() }}
+            Connected as : {{ currentUser.username ? currentUser.username : currentUser.email }}
           </span>
           <li class="nav-item" id="logout" routerLinkActive="active">
             <button class="btn btn-danger" (click)="onLogout()">Logout</button>

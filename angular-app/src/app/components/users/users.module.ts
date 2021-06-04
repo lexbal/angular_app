@@ -2,15 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { UserListRoutingModule } from './user-list-routing.module';
-import { UserListComponent } from './user-list.component';
-import { UserComponent } from '../user/user.component';
-import { UserFormComponent } from '../user-form/user-form.component';
+import { UsersRoutingModule } from './users-routing.module';
+import { UserListComponent } from './user-list/user-list.component';
+import { UserComponent } from './user/user.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    UserListRoutingModule,
+    UsersRoutingModule,
     FormsModule,
     ReactiveFormsModule,
   ],
@@ -20,7 +20,7 @@ import { UserFormComponent } from '../user-form/user-form.component';
     UserFormComponent
   ]
 })
-export class UserListModule { }
+export class UsersModule { }
 
 
 /*

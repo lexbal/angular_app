@@ -17,11 +17,15 @@ const routes: Routes = [
   },
   { 
     path: 'users', 
-    loadChildren: () => import('./components/users/user-list/user-list.module').then(m => m.UserListModule) 
+    loadChildren: () => import('./components/users/users.module').then(m => m.UsersModule) 
   },
   { 
     path: 'courses',
     loadChildren: () => import('./components/courses/courses.module').then(m => m.CoursesModule) 
+  },
+  { 
+    path: 'books',
+    loadChildren: () => import('./components/books/books.module').then(m => m.BooksModule) 
   },
   { 
     path: 'auth',

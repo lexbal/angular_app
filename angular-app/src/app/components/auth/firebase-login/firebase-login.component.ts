@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../../services/auth/auth.service';
@@ -15,25 +15,23 @@ export class FirebaseLoginComponent implements OnInit {
   loading: boolean = false;
   submitted: boolean = false;
   error: boolean = false;
-  returnUrl: string = "";
 
   constructor(private formBuilder: FormBuilder,
-              private route: ActivatedRoute,
               private router: Router,
               private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.isAuthenticated();
+    
     this.form = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
-
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/'; 
   }
 
   get f() { return this.form.controls; }
 
-  onSubmit() {
+  onSubmit(): void {
     this.submitted = true;
 
     if (this.form.invalid) {
@@ -41,21 +39,19 @@ export class FirebaseLoginComponent implements OnInit {
     }
 
     this.loading = true;
-
-    if (!this.authService.isAuthenticated()) {
+    
+    if (!this.authService.currentUser) {
       this.authService.loginFireBase(this.f.email.value, this.f.password.value)
         .then(
           () => {
-            this.loading = false;
-            this.router.navigate([this.returnUrl]);
+            this.router.navigate(['/']);
           },
           (error) => {
             this.error = error;
-            this.loading = false;
           }
         );
+
+      this.loading = false;
     }
-
   }
-
 }

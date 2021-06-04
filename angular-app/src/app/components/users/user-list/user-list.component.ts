@@ -8,12 +8,10 @@ import { UserService } from '../../../services/user.service';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
+  
   users: User[] = [];
-  userService!: UserService;
 
-  constructor(private $userService: UserService) { 
-    this.userService = $userService;
-  }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.userService.userSubject.subscribe(
@@ -24,5 +22,4 @@ export class UserListComponent implements OnInit {
 
     this.userService.emitUser();
   }
-
 }

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 
-import firebase from 'firebase/app';
-import { from } from 'rxjs';
+import { from, BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 import { UserService } from '../user.service';
@@ -11,44 +10,47 @@ import { UserService } from '../user.service';
   providedIn: 'root'
 })
 export class AuthService {
-  users: User[] = [];
-  isAuth: boolean = false;
+  currentUser!: User|null;
+  currentUserSubject: BehaviorSubject<User|null> = new BehaviorSubject<User|null>(null);
 
-  constructor(
-    private afAuth: AngularFireAuth,
-    private userService: UserService
-  ) { }
+  constructor(private afAuth: AngularFireAuth,
+              private userService: UserService) { }
 
-  public isAuthenticated() {
-    return this.afAuth.onAuthStateChanged(
+  public isAuthenticated(): string|Subscription {
+    let userStorage = localStorage.getItem('user');
+
+    if (userStorage) {
+      this.currentUser = JSON.parse(userStorage);
+      this.emitUserSubject();
+
+      return userStorage;
+    }
+    
+    return this.afAuth.authState.subscribe(
       (user) => {
-        if (user) {
-          this.isAuth = true;
-        } else {
-          //localStorage.getItem('user')
-          this.isAuth = false
+        if (!user) {
+          localStorage.removeItem('user');
+
+          return;
         }
-      }
-    )
+
+        this.setCurrentUser(new User("", "", "", user.email?.toString()));
+    });
   }
 
-  public getUsername(): string {
-    let user = this.isAuthenticated();
+  login(username: string, password: string): Observable<User|false> {
+    let users: User[] = [];
 
-    return (user) ? JSON.parse(user).username : null;
-  }
-
-  login(username: string, password: string) {
     this.userService.userSubject.subscribe(
       (users: User[]) => {
-        this.users = users;
+        users = users;
       }
     );
-    this.userService.emitUser();
 
-    return from(this.users).pipe(map(user => {
+    return from(users).pipe(map(user => {
       if (user.username == username && user.password == password) {
-        localStorage.setItem('user', JSON.stringify(user));
+        this.setCurrentUser(user)
+
         return user;
       }
       
@@ -61,6 +63,7 @@ export class AuthService {
       (resolve, reject) => {
         this.afAuth.signInWithEmailAndPassword(email, password).then(
           () => {
+            this.setCurrentUser(new User("", "", "", email))
             resolve();
           },
           (error) => {
@@ -86,9 +89,24 @@ export class AuthService {
     );
   }
 
-  public logout() {
+  logout(): void {
     this.afAuth.signOut();
     localStorage.removeItem('user');
-    //this.router.navigate(['/']);
+    this.currentUser = null;
+    this.emitUserSubject();
+  }
+
+  emitUserSubject(): void {
+    this.currentUserSubject.next(this.currentUser);
+  }
+
+  getCurrentUser(): Observable<any> {
+    return this.currentUserSubject.asObservable();
+  }
+
+  setCurrentUser(user: User): void {
+    this.currentUser = user;
+    localStorage.setItem('user', JSON.stringify(this.currentUser))
+    this.emitUserSubject();
   }
 }

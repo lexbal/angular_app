@@ -8,12 +8,10 @@ import { AppareilService } from '../../../services/appareil.service';
   styleUrls: ['./appareil-view.component.scss']
 })
 export class AppareilViewComponent implements OnInit {
-  appareils: Appareil[] = [];
-  appareilService!: AppareilService;
 
-  constructor(private $appareilService: AppareilService) { 
-    this.appareilService = $appareilService;
-  }
+  appareils: Appareil[] = [];
+
+  constructor(private appareilService: AppareilService) { }
 
   ngOnInit(): void {
     this.appareilService.appareilSubject.subscribe(
@@ -23,5 +21,13 @@ export class AppareilViewComponent implements OnInit {
     );
 
     this.appareilService.emitAppareilSubject();
+  }
+
+  onSwitchOnAll():void {
+    this.appareilService.switchOnAll();
+  }
+
+  onSwitchOffAll():void {
+    this.appareilService.switchOffAll();
   }
 }

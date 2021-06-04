@@ -34,11 +34,11 @@ export class UserFormComponent implements OnInit {
 
   get f() { return this.form.controls; }
 
-  getHobbies() {
+  getHobbies(): FormArray {
     return this.form.get('hobbies') as FormArray;
   }
 
-  onAddHobby() {
+  onAddHobby(): void {
     this.getHobbies().push(
       this.formBuilder.group({
         name: ''
@@ -54,8 +54,6 @@ export class UserFormComponent implements OnInit {
     }
 
     this.loading = true;
-
-    console.log(this.f);
 
     this.userService.addUser(new User(
       this.f.firstname.value,
